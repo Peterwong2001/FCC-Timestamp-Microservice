@@ -49,10 +49,10 @@ app.get("/api/:date?", function(req, res) {
     res.json({error: "Invalid date"})
   }
   res.json(resObj);
-})
+});
 
 app.get("/api", function(req, res) {
   resObj["unix"] = new Date().getTime()
-   
+  resObj["utc"] = new Date().toUTCString()
   res.json(resObj);
 })
