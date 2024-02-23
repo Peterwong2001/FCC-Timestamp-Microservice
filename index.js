@@ -41,9 +41,6 @@ app.get("/api", function(req, res) {
   });
 });
 
-app.get("/api/:date_string", function(req, res) {
-  
-})
 
 app.get("/api/:date?", function(req, res) {
   let date = req.params.date;
@@ -55,6 +52,10 @@ app.get("/api/:date?", function(req, res) {
   } else {
     resObj["unix"] = new Date(parseDate).getTime()
     resObj["utc"] = new Date(parseDate).toUTCString()
+  }
+  if (date.includes(" ")) {
+    resObj["unix"] = new Date(date).getTime()
+    resObj["utc"] = new Date(date).toUTCString()
   }
   if (!resObj["unix"] || !resObj["utc"]) {
     res.json({error: "Invalid date"})
